@@ -1,0 +1,314 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.10
+-- Dumped by pg_dump version 15.4
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+ALTER SCHEMA public OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: employee; Type: TABLE; Schema: public; Owner: user1
+--
+
+CREATE TABLE public.employee (
+    id integer NOT NULL,
+    first_name character varying(255),
+    last_name character varying(255),
+    patronymic character varying(255)
+);
+
+
+ALTER TABLE public.employee OWNER TO user1;
+
+--
+-- Name: employee_id_seq; Type: SEQUENCE; Schema: public; Owner: user1
+--
+
+CREATE SEQUENCE public.employee_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.employee_id_seq OWNER TO user1;
+
+--
+-- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user1
+--
+
+ALTER SEQUENCE public.employee_id_seq OWNED BY public.employee.id;
+
+
+--
+-- Name: test_table; Type: TABLE; Schema: public; Owner: user1
+--
+
+CREATE TABLE public.test_table (
+    id integer NOT NULL,
+    data character varying(20)
+);
+
+
+ALTER TABLE public.test_table OWNER TO user1;
+
+--
+-- Name: test_table_id_seq; Type: SEQUENCE; Schema: public; Owner: user1
+--
+
+CREATE SEQUENCE public.test_table_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.test_table_id_seq OWNER TO user1;
+
+--
+-- Name: test_table_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user1
+--
+
+ALTER SEQUENCE public.test_table_id_seq OWNED BY public.test_table.id;
+
+
+--
+-- Name: vacation_norm; Type: TABLE; Schema: public; Owner: user1
+--
+
+CREATE TABLE public.vacation_norm (
+    id integer NOT NULL,
+    month character varying(20),
+    vacations_count integer
+);
+
+
+ALTER TABLE public.vacation_norm OWNER TO user1;
+
+--
+-- Name: vacation_norm_id_seq; Type: SEQUENCE; Schema: public; Owner: user1
+--
+
+CREATE SEQUENCE public.vacation_norm_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.vacation_norm_id_seq OWNER TO user1;
+
+--
+-- Name: vacation_norm_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user1
+--
+
+ALTER SEQUENCE public.vacation_norm_id_seq OWNED BY public.vacation_norm.id;
+
+
+--
+-- Name: vacations; Type: TABLE; Schema: public; Owner: user1
+--
+
+CREATE TABLE public.vacations (
+    id integer NOT NULL,
+    emp_id integer,
+    vacation_start date,
+    vacation_end date
+);
+
+
+ALTER TABLE public.vacations OWNER TO user1;
+
+--
+-- Name: vacations_id_seq; Type: SEQUENCE; Schema: public; Owner: user1
+--
+
+CREATE SEQUENCE public.vacations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.vacations_id_seq OWNER TO user1;
+
+--
+-- Name: vacations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user1
+--
+
+ALTER SEQUENCE public.vacations_id_seq OWNED BY public.vacations.id;
+
+
+--
+-- Name: employee id; Type: DEFAULT; Schema: public; Owner: user1
+--
+
+ALTER TABLE ONLY public.employee ALTER COLUMN id SET DEFAULT nextval('public.employee_id_seq'::regclass);
+
+
+--
+-- Name: test_table id; Type: DEFAULT; Schema: public; Owner: user1
+--
+
+ALTER TABLE ONLY public.test_table ALTER COLUMN id SET DEFAULT nextval('public.test_table_id_seq'::regclass);
+
+
+--
+-- Name: vacation_norm id; Type: DEFAULT; Schema: public; Owner: user1
+--
+
+ALTER TABLE ONLY public.vacation_norm ALTER COLUMN id SET DEFAULT nextval('public.vacation_norm_id_seq'::regclass);
+
+
+--
+-- Name: vacations id; Type: DEFAULT; Schema: public; Owner: user1
+--
+
+ALTER TABLE ONLY public.vacations ALTER COLUMN id SET DEFAULT nextval('public.vacations_id_seq'::regclass);
+
+
+--
+-- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: user1
+--
+
+COPY public.employee (id, first_name, last_name, patronymic) FROM stdin;
+\.
+
+
+--
+-- Data for Name: test_table; Type: TABLE DATA; Schema: public; Owner: user1
+--
+
+COPY public.test_table (id, data) FROM stdin;
+1	Hello World
+2	Lorem ipsum
+\.
+
+
+--
+-- Data for Name: vacation_norm; Type: TABLE DATA; Schema: public; Owner: user1
+--
+
+COPY public.vacation_norm (id, month, vacations_count) FROM stdin;
+\.
+
+
+--
+-- Data for Name: vacations; Type: TABLE DATA; Schema: public; Owner: user1
+--
+
+COPY public.vacations (id, emp_id, vacation_start, vacation_end) FROM stdin;
+\.
+
+
+--
+-- Name: employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user1
+--
+
+SELECT pg_catalog.setval('public.employee_id_seq', 1, false);
+
+
+--
+-- Name: test_table_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user1
+--
+
+SELECT pg_catalog.setval('public.test_table_id_seq', 2, true);
+
+
+--
+-- Name: vacation_norm_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user1
+--
+
+SELECT pg_catalog.setval('public.vacation_norm_id_seq', 1, false);
+
+
+--
+-- Name: vacations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user1
+--
+
+SELECT pg_catalog.setval('public.vacations_id_seq', 1, false);
+
+
+--
+-- Name: employee employee_pkey; Type: CONSTRAINT; Schema: public; Owner: user1
+--
+
+ALTER TABLE ONLY public.employee
+    ADD CONSTRAINT employee_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: test_table test_table_pkey; Type: CONSTRAINT; Schema: public; Owner: user1
+--
+
+ALTER TABLE ONLY public.test_table
+    ADD CONSTRAINT test_table_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: vacation_norm vacation_norm_pkey; Type: CONSTRAINT; Schema: public; Owner: user1
+--
+
+ALTER TABLE ONLY public.vacation_norm
+    ADD CONSTRAINT vacation_norm_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: vacations vacations_pkey; Type: CONSTRAINT; Schema: public; Owner: user1
+--
+
+ALTER TABLE ONLY public.vacations
+    ADD CONSTRAINT vacations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: vacations vacations_emp_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: user1
+--
+
+ALTER TABLE ONLY public.vacations
+    ADD CONSTRAINT vacations_emp_id_fkey FOREIGN KEY (emp_id) REFERENCES public.employee(id);
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE USAGE ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
