@@ -1,24 +1,23 @@
 #include "testrepository.h"
 
-TestRepository::TestRepository(QSqlDatabase *db)
+TestRepository::TestRepository(const QSqlDatabase &db)
 {
     this->database = db;
 }
 
 QVector<TestDataModel> TestRepository::select_all_rows() {
-    QSqlQuery *query = new QSqlQuery(this->database);
-    if(query->prepare(QString("SELECT id, data FROM test_table"))) {
-        delete query;
-        return QVector<TestDataModel{};
+    QSqlQuery query{this->database};
+    if(query.prepare(QString("SELECT id, data FROM test_table"))) {
+        return QVector<TestDataModel>{};
     }
 
     QVector<TestDataModel> result{};
-    query->exec();
-    while (query->next()) {
-        result.push_back(TestDataModel(query->value(0).toInt(),
-                                       query->value(1).toString()));
+    query.exec();
+    while (query.next()) {
+        int id = query.value(0).toInt();
+        QString data = query.value(1).toString();
+        result.push_back(TestDataModel{id, data});
     }
 
-    delete query;
     return result;
 }
