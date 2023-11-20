@@ -5,11 +5,17 @@ QDbHelper::QDbHelper()
 
 }
 
+QDbHelper::~QDbHelper()
+{
+
+}
+
 bool QDbHelper::connect(const QString& server,
                                     const QString& databaseName,
                                     const QString& userName,
                                     const QString& password )
 {
+    db = QSqlDatabase::addDatabase("QPSQL");
     db.setConnectOptions();
     db.setHostName(server);
     db.setDatabaseName(databaseName);

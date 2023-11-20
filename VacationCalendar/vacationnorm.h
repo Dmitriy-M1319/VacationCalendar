@@ -12,7 +12,7 @@ namespace Vacations::Models
                      const QString &month,
                      int vacations_count);
         int id() const;
-        const QString &month();
+        const QString &month() const;
         int vacations_count() const;
     private:
         int m_id;

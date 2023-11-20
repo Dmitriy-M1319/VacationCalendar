@@ -15,7 +15,7 @@ int VacationNorm::id() const
     return this->m_id;
 }
 
-const QString &VacationNorm::month()
+const QString &VacationNorm::month() const
 {
     return this->m_month;
 }
