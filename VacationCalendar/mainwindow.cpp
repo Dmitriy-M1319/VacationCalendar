@@ -14,8 +14,10 @@ MainWindow::MainWindow(QWidget *parent)
         msgBox.setText("Failed to open database connection.");
         msgBox.exec();
     }
-    repo.set_db(helper.database());
-    auto normas = repo.get_all_normas();
+    norm_repo.set_db(helper.database());
+    emp_repo.set_db(helper.database());
+    vac_repo.set_db(helper.database());
+    auto normas = norm_repo.get_all_normas();
 
     ui->setupUi(this);
     foreach (const Vacations::Models::VacationNorm& norm, normas)

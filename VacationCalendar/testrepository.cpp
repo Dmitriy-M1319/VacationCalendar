@@ -7,7 +7,8 @@ TestRepository::TestRepository(const QSqlDatabase &db)
 
 QVector<TestDataModel> TestRepository::select_all_rows() {
     QSqlQuery query{this->database};
-    if(query.prepare(QString("SELECT id, data FROM test_table"))) {
+    if(query.prepare(QString("SELECT id, emp_id, to_char(vacation_start, 'YYYY-MM-DD') AS start,"
+                              "to_char(vacation_end, 'YYYY-MM-DD') AS end from vacations;"))) {
         return QVector<TestDataModel>{};
     }
 

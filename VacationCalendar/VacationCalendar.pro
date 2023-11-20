@@ -11,6 +11,7 @@ CONFIG += console
 
 SOURCES += \
     employee.cpp \
+    employeerepository.cpp \
     main.cpp \
     mainwindow.cpp \
     qdbhelper.cpp \
@@ -18,17 +19,20 @@ SOURCES += \
     testrepository.cpp \
     vacation.cpp \
     vacationnorm.cpp \
-    vacationnormrepository.cpp
+    vacationnormrepository.cpp \
+    vacationrepository.cpp
 
 HEADERS += \
     employee.h \
+    employeerepository.h \
     mainwindow.h \
     qdbhelper.h \
     testdatamodel.h \
     testrepository.h \
     vacation.h \
     vacationnorm.h \
-    vacationnormrepository.h
+    vacationnormrepository.h \
+    vacationrepository.h
 
 FORMS += \
     mainwindow.ui

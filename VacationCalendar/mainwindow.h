@@ -8,6 +8,8 @@
 #include <QMessageBox>
 #include "qdbhelper.h"
 #include "vacationnormrepository.h"
+#include "vacationrepository.h"
+#include "employeerepository.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -25,6 +27,8 @@ public:
 private:
     Ui::MainWindow *ui;
     QDbHelper helper;
-    Vacations::Repositories::VacationNormRepository repo;
+    Vacations::Repositories::VacationNormRepository norm_repo;
+    Vacations::Repositories::VacationRepository vac_repo;
+    Vacations::Repositories::EmployeeRepository emp_repo;
 };
 #endif // MAINWINDOW_H

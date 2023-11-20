@@ -5,13 +5,11 @@ using namespace Vacations::Models;
 Employee::Employee(int id,
                    QString first_name,
                    QString last_name,
-                   QString patronymic,
-                   QVector<Vacation> vacations):
+                   QString patronymic):
     m_id(id),
     m_first_name(first_name),
     m_last_name(last_name),
-    m_patronymic(patronymic),
-    m_vacations(vacations)
+    m_patronymic(patronymic)
 {
 
 }
@@ -39,4 +37,9 @@ const QString &Employee::patronymic()
 const QVector<Vacation> &Employee::vacations()
 {
     return this->m_vacations;
+}
+
+void Employee::set_vacations(const QVector<Vacation> &vacations)
+{
+    this->m_vacations = vacations;
 }

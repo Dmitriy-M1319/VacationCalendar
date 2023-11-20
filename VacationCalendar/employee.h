@@ -13,14 +13,14 @@ namespace Vacations::Models
         Employee(int id,
                  QString first_name,
                  QString last_name,
-                 QString patronymic,
-                 QVector<Vacation> vacations);
+                 QString patronymic);
 
         int id() const;
         const QString& first_name();
         const QString& last_name();
         const QString& patronymic();
         const QVector<Vacation> &vacations();
+        void set_vacations(const QVector<Vacation> &vacations);
 
     private:
         int m_id;
