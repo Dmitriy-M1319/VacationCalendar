@@ -5,12 +5,16 @@
 #include <QString>
 #include <QStringList>
 #include <QListWidgetItem>
+#include <QTableWidget>
+#include <QTableWidgetItem>
 #include <QMessageBox>
 #include "qdbhelper.h"
 #include "vacationnormrepository.h"
 #include "vacationrepository.h"
 #include "employeerepository.h"
 
+namespace Repos = Vacations::Repositories;
+namespace Models = Vacations::Models;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,13 +26,15 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void prepare_table(const QVector<Models::Employee> &emps,
+                       const QVector<Models::VacationNorm> &normas);
     ~MainWindow();
 
 private:
     Ui::MainWindow *ui;
     QDbHelper helper;
-    Vacations::Repositories::VacationNormRepository norm_repo;
-    Vacations::Repositories::VacationRepository vac_repo;
-    Vacations::Repositories::EmployeeRepository emp_repo;
+    Repos::VacationNormRepository norm_repo;
+    Repos::VacationRepository vac_repo;
+    Repos::EmployeeRepository emp_repo;
 };
 #endif // MAINWINDOW_H

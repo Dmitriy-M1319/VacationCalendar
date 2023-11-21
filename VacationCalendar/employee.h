@@ -16,11 +16,12 @@ namespace Vacations::Models
                  QString patronymic);
 
         int id() const;
-        const QString& first_name();
-        const QString& last_name();
-        const QString& patronymic();
-        const QVector<Vacation> &vacations();
+        const QString& first_name() const;
+        const QString& last_name() const ;
+        const QString& patronymic() const;
+        const QVector<Vacation> &vacations() const;
         void set_vacations(const QVector<Vacation> &vacations);
+        int get_vacation_days_count(int month_index) const;
 
     private:
         int m_id;
