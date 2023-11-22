@@ -53,3 +53,10 @@ int Employee::get_vacation_days_count(int month_index) const
     }
     return 0;
 }
+
+QString Employee::get_fio() const
+{
+    return m_last_name + " " +
+           m_first_name.right(1).toUpper() + "." +
+           m_patronymic.right(1).toUpper() + ".";
+}

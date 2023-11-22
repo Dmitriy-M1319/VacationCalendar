@@ -22,6 +22,7 @@ namespace Vacations::Models
         const QVector<Vacation> &vacations() const;
         void set_vacations(const QVector<Vacation> &vacations);
         int get_vacation_days_count(int month_index) const;
+        QString get_fio() const;
 
     private:
         int m_id;

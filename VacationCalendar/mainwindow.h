@@ -4,10 +4,9 @@
 #include <QMainWindow>
 #include <QString>
 #include <QStringList>
-#include <QListWidgetItem>
-#include <QTableWidget>
-#include <QTableWidgetItem>
 #include <QMessageBox>
+#include <QGraphicsScene>
+#include <QGraphicsTextItem>
 #include "qdbhelper.h"
 #include "vacationnormrepository.h"
 #include "vacationrepository.h"
@@ -26,12 +25,13 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    void prepare_table(const QVector<Models::Employee> &emps,
-                       const QVector<Models::VacationNorm> &normas);
+    void draw_month_lines();
+    void draw_employees_list(const QVector<Models::Employee> &emps);
     ~MainWindow();
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene *scene;
     QDbHelper helper;
     Repos::VacationNormRepository norm_repo;
     Repos::VacationRepository vac_repo;

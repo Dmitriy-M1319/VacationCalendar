@@ -1,6 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QLabel>
+#define LABEL_HEIGHT 20
+#define MONTHS_LENGTH 1080
+#define VIEW_SCENE_DIFF_WIDTH 4
+#define VIEW_SCENE_DIFF_HEIGHT 12
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,29 +32,53 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     ui->setupUi(this);
-    prepare_table(employees, normas);
+    scene = new QGraphicsScene(0, 0,
+                               ui->graphicsView->width() - VIEW_SCENE_DIFF_WIDTH,
+                               ui->graphicsView->height() - VIEW_SCENE_DIFF_HEIGHT);
+    foreach (const Models::VacationNorm& norm, normas)
+    {
+        QLabel *label = new QLabel(norm.month());
+        label->setAlignment(Qt::AlignCenter);
+        label->setMargin(0);
+        ui->monthsLayout->addWidget(label);
+    }
+
+    draw_month_lines();
+    draw_employees_list(employees);
+    ui->graphicsView->setScene(scene);
+    ui->graphicsView->show();
 }
 
-void MainWindow::prepare_table(const QVector<Models::Employee> &emps,
-                               const QVector<Models::VacationNorm> &normas)
+void MainWindow::draw_month_lines()
 {
-    ui->vacations_table->setRowCount(emps.size());
-    ui->vacations_table->setColumnCount(normas.size());
-    for (int row = 0; row < emps.size(); ++row)
-    {
-        for (int month_index = 0; month_index < normas.size(); ++month_index)
-        {
-            int days_count = emps[row].get_vacation_days_count(month_index + 1);
-            //TODO: Сделать вывод каждой части отпуска в своем месяце
-            QString tArg = "";
-            if(days_count != 0)
-            {
-                tArg = QString("%1").arg(days_count);
-            }
-            QTableWidgetItem *vacationItem = new QTableWidgetItem(tArg);
-            ui->vacations_table->setItem(row, month_index, vacationItem);
-        }
+    int scene_height = scene->height();
+    int scene_width = MONTHS_LENGTH;
+    qDebug() << scene_height << scene_width;
+    int month_length = scene_width / 12;
+    float first_x = (scene->width() - MONTHS_LENGTH) + month_length / 2;
+    for (int i = 0; i < 12; ++i) {
+        QLineF line(first_x,
+               scene_height,
+               first_x,
+               scene_width - 10);
+        scene->addLine(line, QPen(Qt::black));
+        first_x += month_length;
     }
+    //scene->addRect(0, 0, 40, 40, QPen(Qt::black), QBrush(Qt::red));
+}
+
+void MainWindow::draw_employees_list(const QVector<Models::Employee> &emps)
+{
+    int ystart = 0;
+    int right_border = scene->width() - MONTHS_LENGTH - 1;
+    foreach(const Models::Employee& emp, emps)
+    {
+        QGraphicsTextItem *txt = scene->addText(emp.get_fio(), QFont("Times", LABEL_HEIGHT - 5, QFont::Normal));
+        txt->setPos(0, ystart);
+        scene->addRect(0, ystart, right_border, LABEL_HEIGHT + 5, QPen(Qt::black));
+        ystart += LABEL_HEIGHT + 5;
+    }
+    scene->addRect(0, 0, right_border, scene->height());
 }
 
 MainWindow::~MainWindow()
