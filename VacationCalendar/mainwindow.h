@@ -1,12 +1,15 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <utility>
 #include <QMainWindow>
 #include <QString>
+#include <QPainter>
 #include <QStringList>
 #include <QMessageBox>
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
+#include <QLabel>
 #include "qdbhelper.h"
 #include "vacationnormrepository.h"
 #include "vacationrepository.h"
@@ -25,6 +28,8 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    QVector<std::pair<QRect, int>> calc_diagramm_for_employee(const Models::Employee &emp);
+    void draw_diagramm_part(const QVector<std::pair<QRect, int>>& parts);
     void draw_month_lines();
     void draw_employees_list(const QVector<Models::Employee> &emps);
     ~MainWindow();
