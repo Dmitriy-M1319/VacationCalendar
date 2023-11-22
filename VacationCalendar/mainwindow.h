@@ -31,6 +31,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     QVector<std::pair<QRect, Models::Vacation>> calc_diagramm_for_employee(const Models::Employee &emp);
     void draw_diagramm_part(const QVector<std::pair<QRect, Models::Vacation>>& parts);
+    void draw_gantt_lines(int employees_count);
     void draw_month_lines();
     void draw_employees_list(const QVector<Models::Employee> &emps);
     ~MainWindow();

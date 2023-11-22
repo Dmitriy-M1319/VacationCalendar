@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
                                ui->graphicsView->width() - VIEW_SCENE_DIFF_WIDTH,
                                ui->graphicsView->height() - VIEW_SCENE_DIFF_HEIGHT);
     draw_month_lines();
+    draw_gantt_lines(employees.size());
     draw_employees_list(employees);
     foreach (const Models::Employee& emp, employees) {
         auto results = calc_diagramm_for_employee(emp);
@@ -104,6 +105,16 @@ void MainWindow::draw_diagramm_part(const QVector<std::pair<QRect, Models::Vacat
     }
 }
 
+void MainWindow::draw_gantt_lines(int employees_count)
+{
+    int y_start = (LABEL_HEIGHT + 5) / 2;
+    int x_start = scene->width() - MONTHS_LENGTH;
+    for (int i = 0; i < employees_count; ++i) {
+        scene->addLine(x_start, y_start, scene->width(), y_start);
+        y_start += LABEL_HEIGHT + 5;
+    }
+}
+
 void MainWindow::draw_month_lines()
 {
     int scene_height = scene->height();
@@ -115,7 +126,7 @@ void MainWindow::draw_month_lines()
         QLineF line(first_x,
                scene_height,
                first_x,
-               scene_width - 10);
+               0);
         scene->addLine(line, QPen(Qt::black));
         first_x += month_length;
     }
