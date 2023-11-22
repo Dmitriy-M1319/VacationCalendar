@@ -24,7 +24,7 @@ QVector<Vacations::Models::Vacation> VacationRepository::get_vacations_for_emplo
     query.setQuery(QString("SELECT id, emp_id, to_char(vacation_start, 'YYYY-MM-DD') AS start,"
                            " to_char(vacation_end, 'YYYY-MM-DD') AS end,"
                            "(vacation_end - vacation_start) AS days_count "
-                           "FROM vacations WHERE emp_id = %1;").arg(employee_id));
+                           "FROM vacations WHERE emp_id = %1 ORDER BY id;").arg(employee_id));
 
     for(int i = 0; i < query.rowCount(); ++i)
     {

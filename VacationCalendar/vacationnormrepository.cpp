@@ -18,7 +18,7 @@ QVector<Vacations::Models::VacationNorm> VacationNormRepository::get_all_normas(
 {
     QVector<Models::VacationNorm> result{};
     QSqlQueryModel query;
-    query.setQuery("SELECT * FROM vacation_norm");
+    query.setQuery("SELECT * FROM vacation_norm ORDER BY id");
 
     for(int i = 0; i < query.rowCount(); ++i)
     {

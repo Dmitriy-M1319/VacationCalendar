@@ -37,7 +37,7 @@
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>50</y>
       <width>1348</width>
       <height>301</height>
@@ -58,9 +58,9 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>290</x>
       <y>350</y>
-      <width>1101</width>
+      <width>1071</width>
       <height>31</height>
      </rect>
     </property>

@@ -10,6 +10,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 #include <QLabel>
+#include <QMap>
 #include "qdbhelper.h"
 #include "vacationnormrepository.h"
 #include "vacationrepository.h"
@@ -28,8 +29,8 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    QVector<std::pair<QRect, int>> calc_diagramm_for_employee(const Models::Employee &emp);
-    void draw_diagramm_part(const QVector<std::pair<QRect, int>>& parts);
+    QVector<std::pair<QRect, Models::Vacation>> calc_diagramm_for_employee(const Models::Employee &emp);
+    void draw_diagramm_part(const QVector<std::pair<QRect, Models::Vacation>>& parts);
     void draw_month_lines();
     void draw_employees_list(const QVector<Models::Employee> &emps);
     ~MainWindow();
@@ -37,6 +38,7 @@ public:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
+    QMap<int, int> normas_count;
     QDbHelper helper;
     Repos::VacationNormRepository norm_repo;
     Repos::VacationRepository vac_repo;

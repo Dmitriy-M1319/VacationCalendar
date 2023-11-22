@@ -16,7 +16,7 @@ QVector<Vacations::Models::Employee> EmployeeRepository::get_employees()
 {
     QVector<Vacations::Models::Employee> result{};
     QSqlQueryModel query;
-    query.setQuery("SELECT * FROM employee");
+    query.setQuery("SELECT * FROM employee ORDER BY id");
 
     for(int i = 0; i < query.rowCount(); ++i)
     {
