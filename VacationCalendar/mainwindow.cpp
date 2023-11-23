@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 #define LABEL_HEIGHT 20
 #define MONTHS_LENGTH 1080
 #define VIEW_SCENE_DIFF_WIDTH 4
@@ -11,11 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    //TODO: Вынести данные подключения к БД в отдельный конфиг
-    if(!helper.connect("localhost",
-                      "vacations",
-                       "postgres",
-                       "12345"))
+    QDbConfig config{};
+    if(!helper.connect(config.host(),config.name(),config.username(), config.password()))
     {
         QMessageBox msgBox;
         msgBox.setText("Failed to open database connection.");

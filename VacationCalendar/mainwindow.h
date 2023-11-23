@@ -12,6 +12,7 @@
 #include <QLabel>
 #include <QMap>
 #include "qdbhelper.h"
+#include "qdbconfig.h"
 #include "vacationnormrepository.h"
 #include "vacationrepository.h"
 #include "employeerepository.h"

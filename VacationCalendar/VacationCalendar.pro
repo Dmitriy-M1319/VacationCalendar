@@ -14,6 +14,7 @@ SOURCES += \
     employeerepository.cpp \
     main.cpp \
     mainwindow.cpp \
+    qdbconfig.cpp \
     qdbhelper.cpp \
     testdatamodel.cpp \
     testrepository.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     employee.h \
     employeerepository.h \
     mainwindow.h \
+    qdbconfig.h \
     qdbhelper.h \
     testdatamodel.h \
     testrepository.h \
