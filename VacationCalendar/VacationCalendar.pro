@@ -16,6 +16,7 @@ SOURCES += \
     mainwindow.cpp \
     qdbconfig.cpp \
     qdbhelper.cpp \
+    qganttdiagarmm.cpp \
     testdatamodel.cpp \
     testrepository.cpp \
     vacation.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     mainwindow.h \
     qdbconfig.h \
     qdbhelper.h \
+    qganttdiagarmm.h \
     testdatamodel.h \
     testrepository.h \
     vacation.h \
