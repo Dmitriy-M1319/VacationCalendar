@@ -7,41 +7,24 @@
     <x>0</x>
     <y>0</y>
     <width>1406</width>
-    <height>451</height>
+    <height>641</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>20</y>
-      <width>331</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Montserrat</family>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>График отпусков на календарный год</string>
-    </property>
-   </widget>
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>50</y>
       <width>1348</width>
-      <height>301</height>
+      <height>501</height>
      </rect>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
     </property>
     <property name="sceneRect">
      <rectf>
@@ -58,9 +41,9 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>350</y>
-      <width>1071</width>
+      <x>280</x>
+      <y>550</y>
+      <width>1081</width>
       <height>31</height>
      </rect>
     </property>

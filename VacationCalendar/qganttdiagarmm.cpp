@@ -10,22 +10,22 @@ QGanttDiagarmm::QGanttDiagarmm(const QVector<Models::Employee> &emps,
     }
 }
 
-QVector<std::pair<QRect, Models::Vacation>> QGanttDiagarmm::calc_diagramm_for_employee(const Models::Employee &emp)
+QVector<std::pair<QRectF, Models::Vacation>> QGanttDiagarmm::calc_diagramm_for_employee(const Models::Employee &emp)
 {
-    QVector<std::pair<QRect, Models::Vacation>> result;
+    QVector<std::pair<QRectF, Models::Vacation>> result;
     int days_in_year = 365;
     int y_start = (emp.id() - 1) * (LABEL_HEIGHT + 5);
     if(emp.vacations().size() != 0 && QDate::isLeapYear(emp.vacations()[0].start().year())) {
         days_in_year = 366;
     }
-    int pixels_in_day = MONTHS_LENGTH / days_in_year;
+    float pixels_in_day = float(MONTHS_LENGTH) / days_in_year;
     foreach (const Models::Vacation& vac, emp.vacations()) {
         // Сначала необходимо вычислить начало промежутка
-        int x_start = (MONTHS_LENGTH * vac.start().dayOfYear() / days_in_year) +
+        float x_start = (float(MONTHS_LENGTH) * vac.start().dayOfYear() / days_in_year) +
                       (scene->width() - MONTHS_LENGTH);
         // Теперь вычисляем длину всего отрезка
-        int vac_length = pixels_in_day * vac.days_count();
-        QRect diagram_rect(x_start, y_start, vac_length, LABEL_HEIGHT + 5);
+        float vac_length = pixels_in_day * vac.days_count();
+        QRectF diagram_rect(x_start, y_start, vac_length, LABEL_HEIGHT + 5);
         result.push_back(std::make_pair(diagram_rect, vac));
 
         normas_count[vac.start().month()]--;
@@ -40,7 +40,7 @@ void QGanttDiagarmm::draw(QGraphicsView *view, QHBoxLayout *months)
 {
     scene = new QGraphicsScene(0, 0,
                                view->width() - VIEW_SCENE_DIFF_WIDTH,
-                               view->height() - VIEW_SCENE_DIFF_HEIGHT);
+                               m_emps.size() * (LABEL_HEIGHT + 5));
     draw_month_lines();
     draw_gantt_lines();
     draw_employees_list();
@@ -54,18 +54,20 @@ void QGanttDiagarmm::draw(QGraphicsView *view, QHBoxLayout *months)
         QLabel *label = new QLabel(norm.month());
         label->setAlignment(Qt::AlignCenter);
         if(normas_count[norm.id()] >= 0) {
-            label->setStyleSheet("background-color: #00ff01");
+            label->setStyleSheet("background-color: #52c17b");
         } else {
             label->setStyleSheet("background-color: #ff0000");
         }
         label->setMargin(0);
         months->addWidget(label);
     }
+    view->setSceneRect(0, 0, view->width() - 4, m_emps.size() * (LABEL_HEIGHT + 5));
     view->setScene(scene);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     view->show();
 }
 
-void QGanttDiagarmm::draw_diagramm_part(const QVector<std::pair<QRect, Models::Vacation>> &parts)
+void QGanttDiagarmm::draw_diagramm_part(const QVector<std::pair<QRectF, Models::Vacation>> &parts)
 {
     foreach (const auto& part, parts) {
         scene->addRect(part.first, QPen(Qt::black));
@@ -79,6 +81,14 @@ void QGanttDiagarmm::draw_diagramm_part(const QVector<std::pair<QRect, Models::V
         scene->addWidget(label);
         label->move(QPoint(part.first.x() + 1, part.first.y() + 1));
     }
+}
+
+std::tuple<int, int> QGanttDiagarmm::get_first_and_last_days_numbers(int month_index)
+{
+    QDate start_day{QDate::currentDate().year(), month_index, 1};
+    int first = start_day.dayOfYear();
+    int last = start_day.addMonths(1).addDays(-1).dayOfYear();
+    return std::make_tuple(first, last);
 }
 
 void QGanttDiagarmm::draw_gantt_lines()
@@ -95,15 +105,21 @@ void QGanttDiagarmm::draw_month_lines()
 {
     int scene_height = scene->height();
     int scene_width = MONTHS_LENGTH;
-    int month_length = scene_width / 12;
-    float first_x = (scene->width() - MONTHS_LENGTH) + month_length / 2;
+    // Для упрощения будет получать год для текущего набор данных
+    int days_in_year = 365;
+    if(m_emps[0].vacations().size() != 0 && QDate::isLeapYear(m_emps[0].vacations()[0].start().year())) {
+        days_in_year = 366;
+    }
+    float first_x = (scene->width() - MONTHS_LENGTH);
     for (int i = 0; i < 12; ++i) {
-        QLineF line(first_x,
-                    scene_height,
-                    first_x,
-                    0);
-        scene->addLine(line, QPen(Qt::black));
-        first_x += month_length;
+        auto dates = get_first_and_last_days_numbers(i + 1);
+        float first_day_pixels = (float(scene_width) * std::get<0>(dates) / days_in_year) + first_x;
+        float last_day_pixels = (float(scene_width) * std::get<1>(dates) / days_in_year) + first_x;
+
+        QLineF line1(first_day_pixels, scene_height, first_day_pixels, 0);
+        QLineF line2(last_day_pixels, scene_height, last_day_pixels, 0);
+        scene->addLine(line1, QPen(Qt::black));
+        scene->addLine(line2, QPen(Qt::black));
     }
 }
 

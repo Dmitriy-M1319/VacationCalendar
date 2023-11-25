@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    w.setWindowTitle("График отпусков");
+    w.setWindowTitle("График отпусков на календарный год");
     w.show();
     return a.exec();
 }

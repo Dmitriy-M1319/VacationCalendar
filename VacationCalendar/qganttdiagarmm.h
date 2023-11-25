@@ -1,12 +1,15 @@
 #ifndef QGANTTDIAGARMM_H
 #define QGANTTDIAGARMM_H
 
+#include <chrono>
+#include <tuple>
 #include <utility>
 #include <QObject>
 #include <QDate>
 #include <QRect>
 #include <QLabel>
 #include <QPoint>
+#include <QScrollBar>
 #include <QGraphicsLineItem>
 #include <QGraphicsRectItem>
 #include <QGraphicsTextItem>
@@ -44,11 +47,12 @@ private:
     QVector<Models::Employee> m_emps;
     QVector<Models::VacationNorm> m_normas;
 
-    void draw_diagramm_part(const QVector<std::pair<QRect, Models::Vacation>>& parts);
+    void draw_diagramm_part(const QVector<std::pair<QRectF, Models::Vacation>>& parts);
+    std::tuple<int, int> get_first_and_last_days_numbers(int month_index);
     void draw_gantt_lines();
     void draw_month_lines();
     void draw_employees_list();
-    QVector<std::pair<QRect, Models::Vacation>> calc_diagramm_for_employee(const Models::Employee &emp);
+    QVector<std::pair<QRectF, Models::Vacation>> calc_diagramm_for_employee(const Models::Employee &emp);
 };
 
 #endif // QGANTTDIAGARMM_H
