@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.10
+-- Dumped from database version 14.7 (Debian 14.7-1.pgdg110+1)
 -- Dumped by pg_dump version 15.4
 
 SET statement_timeout = 0;
@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: employee; Type: TABLE; Schema: public; Owner: user1
+-- Name: employee; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.employee (
@@ -41,10 +41,10 @@ CREATE TABLE public.employee (
 );
 
 
-ALTER TABLE public.employee OWNER TO user1;
+ALTER TABLE public.employee OWNER TO postgres;
 
 --
--- Name: employee_id_seq; Type: SEQUENCE; Schema: public; Owner: user1
+-- Name: employee_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.employee_id_seq
@@ -56,17 +56,17 @@ CREATE SEQUENCE public.employee_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.employee_id_seq OWNER TO user1;
+ALTER TABLE public.employee_id_seq OWNER TO postgres;
 
 --
--- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user1
+-- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.employee_id_seq OWNED BY public.employee.id;
 
 
 --
--- Name: test_table; Type: TABLE; Schema: public; Owner: user1
+-- Name: test_table; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.test_table (
@@ -75,10 +75,10 @@ CREATE TABLE public.test_table (
 );
 
 
-ALTER TABLE public.test_table OWNER TO user1;
+ALTER TABLE public.test_table OWNER TO postgres;
 
 --
--- Name: test_table_id_seq; Type: SEQUENCE; Schema: public; Owner: user1
+-- Name: test_table_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.test_table_id_seq
@@ -90,17 +90,17 @@ CREATE SEQUENCE public.test_table_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.test_table_id_seq OWNER TO user1;
+ALTER TABLE public.test_table_id_seq OWNER TO postgres;
 
 --
--- Name: test_table_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user1
+-- Name: test_table_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.test_table_id_seq OWNED BY public.test_table.id;
 
 
 --
--- Name: vacation_norm; Type: TABLE; Schema: public; Owner: user1
+-- Name: vacation_norm; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.vacation_norm (
@@ -110,10 +110,10 @@ CREATE TABLE public.vacation_norm (
 );
 
 
-ALTER TABLE public.vacation_norm OWNER TO user1;
+ALTER TABLE public.vacation_norm OWNER TO postgres;
 
 --
--- Name: vacation_norm_id_seq; Type: SEQUENCE; Schema: public; Owner: user1
+-- Name: vacation_norm_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.vacation_norm_id_seq
@@ -125,17 +125,17 @@ CREATE SEQUENCE public.vacation_norm_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.vacation_norm_id_seq OWNER TO user1;
+ALTER TABLE public.vacation_norm_id_seq OWNER TO postgres;
 
 --
--- Name: vacation_norm_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user1
+-- Name: vacation_norm_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.vacation_norm_id_seq OWNED BY public.vacation_norm.id;
 
 
 --
--- Name: vacations; Type: TABLE; Schema: public; Owner: user1
+-- Name: vacations; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.vacations (
@@ -146,10 +146,10 @@ CREATE TABLE public.vacations (
 );
 
 
-ALTER TABLE public.vacations OWNER TO user1;
+ALTER TABLE public.vacations OWNER TO postgres;
 
 --
--- Name: vacations_id_seq; Type: SEQUENCE; Schema: public; Owner: user1
+-- Name: vacations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.vacations_id_seq
@@ -161,53 +161,73 @@ CREATE SEQUENCE public.vacations_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.vacations_id_seq OWNER TO user1;
+ALTER TABLE public.vacations_id_seq OWNER TO postgres;
 
 --
--- Name: vacations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user1
+-- Name: vacations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.vacations_id_seq OWNED BY public.vacations.id;
 
 
 --
--- Name: employee id; Type: DEFAULT; Schema: public; Owner: user1
+-- Name: employee id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.employee ALTER COLUMN id SET DEFAULT nextval('public.employee_id_seq'::regclass);
 
 
 --
--- Name: test_table id; Type: DEFAULT; Schema: public; Owner: user1
+-- Name: test_table id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.test_table ALTER COLUMN id SET DEFAULT nextval('public.test_table_id_seq'::regclass);
 
 
 --
--- Name: vacation_norm id; Type: DEFAULT; Schema: public; Owner: user1
+-- Name: vacation_norm id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.vacation_norm ALTER COLUMN id SET DEFAULT nextval('public.vacation_norm_id_seq'::regclass);
 
 
 --
--- Name: vacations id; Type: DEFAULT; Schema: public; Owner: user1
+-- Name: vacations id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.vacations ALTER COLUMN id SET DEFAULT nextval('public.vacations_id_seq'::regclass);
 
 
 --
--- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: user1
+-- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.employee (id, first_name, last_name, patronymic) FROM stdin;
+1	Екатерина	Алексеева	Андреевна
+2	Ольга	Иванова	Владимировна
+3	Наталья	Петрова	Сергеевна
+4	Анна	Смирнова	Александровна
+5	Елена	Козлова	Дмитриевна
+6	Мария	Морозова	Ивановна
+7	Денис	Павлов	Даниэльевич
+8	Дмитрий	Любимов	Ярославович
+9	Марк	Федосеев	Михайлович
+10	Милана	Фролова	Степановна
+11	Ольга	Иванова	Матвеевна
+12	Данис	Попов	Всеволодович
+13	Василиса	Виноградова	Руслановна
+14	Маргарита	Макарова	Кирилловна
+15	Амелия	Горбачева	Альбертовна
+16	Валерия	Петухова	Ивановна
+17	Пётр	Гришин	Тимофеевич
+18	Николай	Савин	Иванович
+19	Ева	Романова	Сергеевна
+20	Анастасия	Ерофеева	Егоровна
 \.
 
 
 --
--- Data for Name: test_table; Type: TABLE DATA; Schema: public; Owner: user1
+-- Data for Name: test_table; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.test_table (id, data) FROM stdin;
@@ -217,51 +237,97 @@ COPY public.test_table (id, data) FROM stdin;
 
 
 --
--- Data for Name: vacation_norm; Type: TABLE DATA; Schema: public; Owner: user1
+-- Data for Name: vacation_norm; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.vacation_norm (id, month, vacations_count) FROM stdin;
+1	Январь	5
+2	Февраль	5
+3	Март	5
+4	Апрель	5
+5	Май	5
+7	Июль	5
+8	Август	5
+9	Сентябрь	5
+11	Ноябрь	5
+12	Декабрь	5
+6	Июнь	0
+10	Октябрь	3
 \.
 
 
 --
--- Data for Name: vacations; Type: TABLE DATA; Schema: public; Owner: user1
+-- Data for Name: vacations; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.vacations (id, emp_id, vacation_start, vacation_end) FROM stdin;
+13	7	2023-09-15	2023-09-29
+15	8	2023-01-05	2023-01-19
+16	8	2023-10-13	2023-10-27
+17	9	2023-02-16	2023-03-02
+18	9	2023-11-03	2023-11-17
+19	10	2023-02-21	2023-03-07
+20	10	2023-10-30	2023-11-13
+21	11	2023-03-05	2023-03-19
+22	11	2023-01-06	2023-01-20
+23	12	2023-10-12	2023-10-26
+24	12	2023-09-15	2023-09-29
+25	13	2023-06-13	2023-06-27
+26	13	2023-11-11	2023-11-25
+27	14	2023-09-21	2023-10-05
+28	14	2023-01-18	2023-02-01
+29	15	2023-05-22	2023-06-05
+30	15	2023-10-04	2023-10-18
+31	16	2023-03-09	2023-03-23
+32	16	2023-08-12	2023-08-26
+33	17	2023-08-24	2023-09-07
+34	17	2023-02-25	2023-03-11
+35	18	2023-04-09	2023-04-23
+36	18	2023-08-21	2023-09-04
+37	19	2023-01-28	2023-02-11
+38	19	2023-06-30	2023-07-14
+39	20	2023-11-21	2023-12-05
+40	20	2023-04-06	2023-04-20
+14	7	2023-06-29	2023-07-13
+1	1	2023-01-01	2023-01-29
+8	2	2023-08-01	2023-08-29
+10	3	2023-03-01	2023-03-29
+4	4	2023-04-01	2023-04-29
+5	5	2023-05-01	2023-05-29
+6	6	2023-06-01	2023-06-29
 \.
 
 
 --
--- Name: employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user1
+-- Name: employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.employee_id_seq', 1, false);
+SELECT pg_catalog.setval('public.employee_id_seq', 20, true);
 
 
 --
--- Name: test_table_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user1
+-- Name: test_table_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.test_table_id_seq', 2, true);
 
 
 --
--- Name: vacation_norm_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user1
+-- Name: vacation_norm_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.vacation_norm_id_seq', 1, false);
-
-
---
--- Name: vacations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: user1
---
-
-SELECT pg_catalog.setval('public.vacations_id_seq', 1, false);
+SELECT pg_catalog.setval('public.vacation_norm_id_seq', 12, true);
 
 
 --
--- Name: employee employee_pkey; Type: CONSTRAINT; Schema: public; Owner: user1
+-- Name: vacations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.vacations_id_seq', 40, true);
+
+
+--
+-- Name: employee employee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.employee
@@ -269,7 +335,7 @@ ALTER TABLE ONLY public.employee
 
 
 --
--- Name: test_table test_table_pkey; Type: CONSTRAINT; Schema: public; Owner: user1
+-- Name: test_table test_table_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.test_table
@@ -277,7 +343,7 @@ ALTER TABLE ONLY public.test_table
 
 
 --
--- Name: vacation_norm vacation_norm_pkey; Type: CONSTRAINT; Schema: public; Owner: user1
+-- Name: vacation_norm vacation_norm_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.vacation_norm
@@ -285,7 +351,7 @@ ALTER TABLE ONLY public.vacation_norm
 
 
 --
--- Name: vacations vacations_pkey; Type: CONSTRAINT; Schema: public; Owner: user1
+-- Name: vacations vacations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.vacations
@@ -293,7 +359,7 @@ ALTER TABLE ONLY public.vacations
 
 
 --
--- Name: vacations vacations_emp_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: user1
+-- Name: vacations vacations_emp_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.vacations
