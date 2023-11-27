@@ -1,6 +1,6 @@
-#include "qganttdiagarmm.h"
+#include "qganttdiagramm.h"
 
-QGanttDiagarmm::QGanttDiagarmm(const QVector<Models::Employee> &emps,
+QGanttDiagramm::QGanttDiagramm(const QVector<Models::Employee> &emps,
                                const QVector<Models::VacationNorm> &normas,
                                QObject *parent)
     : QObject{parent}, m_emps{emps}, m_normas{normas}
@@ -10,7 +10,7 @@ QGanttDiagarmm::QGanttDiagarmm(const QVector<Models::Employee> &emps,
     }
 }
 
-QVector<std::pair<QRectF, Models::Vacation>> QGanttDiagarmm::calc_diagramm_for_employee(const Models::Employee &emp)
+QVector<std::pair<QRectF, Models::Vacation>> QGanttDiagramm::calc_diagramm_for_employee(const Models::Employee &emp)
 {
     QVector<std::pair<QRectF, Models::Vacation>> result;
     int days_in_year = 365;
@@ -36,7 +36,7 @@ QVector<std::pair<QRectF, Models::Vacation>> QGanttDiagarmm::calc_diagramm_for_e
     return result;
 }
 
-void QGanttDiagarmm::draw(QGraphicsView *view, QHBoxLayout *months)
+void QGanttDiagramm::draw(QGraphicsView *view, QHBoxLayout *months)
 {
     scene = new QGraphicsScene(0, 0,
                                view->width() - VIEW_SCENE_DIFF_WIDTH,
@@ -67,7 +67,7 @@ void QGanttDiagarmm::draw(QGraphicsView *view, QHBoxLayout *months)
     view->show();
 }
 
-void QGanttDiagarmm::draw_diagramm_part(const QVector<std::pair<QRectF, Models::Vacation>> &parts)
+void QGanttDiagramm::draw_diagramm_part(const QVector<std::pair<QRectF, Models::Vacation>> &parts)
 {
     foreach (const auto& part, parts) {
         scene->addRect(part.first, QPen(Qt::black));
@@ -83,7 +83,7 @@ void QGanttDiagarmm::draw_diagramm_part(const QVector<std::pair<QRectF, Models::
     }
 }
 
-std::tuple<int, int> QGanttDiagarmm::get_first_and_last_days_numbers(int month_index)
+std::tuple<int, int> QGanttDiagramm::get_first_and_last_days_numbers(int month_index)
 {
     QDate start_day{QDate::currentDate().year(), month_index, 1};
     int first = start_day.dayOfYear();
@@ -91,7 +91,7 @@ std::tuple<int, int> QGanttDiagarmm::get_first_and_last_days_numbers(int month_i
     return std::make_tuple(first, last);
 }
 
-void QGanttDiagarmm::draw_gantt_lines()
+void QGanttDiagramm::draw_gantt_lines()
 {
     int y_start = (LABEL_HEIGHT + 5) / 2;
     int x_start = scene->width() - MONTHS_LENGTH;
@@ -101,7 +101,7 @@ void QGanttDiagarmm::draw_gantt_lines()
     }
 }
 
-void QGanttDiagarmm::draw_month_lines()
+void QGanttDiagramm::draw_month_lines()
 {
     int scene_height = scene->height();
     int scene_width = MONTHS_LENGTH;
@@ -123,7 +123,7 @@ void QGanttDiagarmm::draw_month_lines()
     }
 }
 
-void QGanttDiagarmm::draw_employees_list()
+void QGanttDiagramm::draw_employees_list()
 {
     int ystart = 0;
     int right_border = scene->width() - MONTHS_LENGTH - 1;

@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     ui->setupUi(this);
-    QGanttDiagarmm diagramm{employees, normas};
+    QGanttDiagramm diagramm{employees, normas};
     diagramm.draw(ui->graphicsView, ui->monthsLayout);
 }
 

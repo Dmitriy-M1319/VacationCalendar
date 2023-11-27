@@ -5,7 +5,7 @@
 #include <QMainWindow>
 #include <QString>
 #include <QMessageBox>
-#include "qganttdiagarmm.h"
+#include "qganttdiagramm.h"
 #include "qdbhelper.h"
 #include "qdbconfig.h"
 #include "vacationnormrepository.h"

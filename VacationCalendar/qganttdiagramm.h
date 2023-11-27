@@ -1,5 +1,5 @@
-#ifndef QGANTTDIAGARMM_H
-#define QGANTTDIAGARMM_H
+#ifndef QGANTTDIAGRAMM_H
+#define QGANTTDIAGRAMM_H
 
 #include <chrono>
 #include <tuple>
@@ -30,11 +30,11 @@
 
 namespace Models = Vacations::Models;
 
-class QGanttDiagarmm : public QObject
+class QGanttDiagramm : public QObject
 {
     Q_OBJECT
 public:
-    explicit QGanttDiagarmm(const QVector<Models::Employee> &emps,
+    explicit QGanttDiagramm(const QVector<Models::Employee> &emps,
                             const QVector<Models::VacationNorm> &normas,
                             QObject *parent = nullptr);
     void draw(QGraphicsView *view, QHBoxLayout *months);
@@ -55,4 +55,4 @@ private:
     QVector<std::pair<QRectF, Models::Vacation>> calc_diagramm_for_employee(const Models::Employee &emp);
 };
 
-#endif // QGANTTDIAGARMM_H
+#endif // QGANTTDIAGRAMM_H
