@@ -49,7 +49,6 @@ private:
 
     void draw_diagramm_part(const QVector<std::pair<QRectF, Models::Vacation>>& parts);
     std::tuple<int, int> get_first_and_last_days_numbers(int month_index);
-    void draw_gantt_lines();
     void draw_month_lines();
     void draw_employees_list();
     QVector<std::pair<QRectF, Models::Vacation>> calc_diagramm_for_employee(const Models::Employee &emp);

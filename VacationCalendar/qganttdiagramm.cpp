@@ -42,7 +42,6 @@ void QGanttDiagramm::draw(QGraphicsView *view, QHBoxLayout *months)
                                view->width() - VIEW_SCENE_DIFF_WIDTH,
                                m_emps.size() * (LABEL_HEIGHT + 5));
     draw_month_lines();
-    draw_gantt_lines();
     draw_employees_list();
     foreach (const Models::Employee& emp, m_emps) {
         auto results = calc_diagramm_for_employee(emp);
@@ -91,16 +90,6 @@ std::tuple<int, int> QGanttDiagramm::get_first_and_last_days_numbers(int month_i
     return std::make_tuple(first, last);
 }
 
-void QGanttDiagramm::draw_gantt_lines()
-{
-    int y_start = (LABEL_HEIGHT + 5) / 2;
-    int x_start = scene->width() - MONTHS_LENGTH;
-    for (int i = 0; i < m_emps.size(); ++i) {
-        scene->addLine(x_start, y_start, scene->width(), y_start);
-        y_start += LABEL_HEIGHT + 5;
-    }
-}
-
 void QGanttDiagramm::draw_month_lines()
 {
     int scene_height = scene->height();
@@ -132,6 +121,7 @@ void QGanttDiagramm::draw_employees_list()
         QGraphicsTextItem *txt = scene->addText(emp.get_fio(), QFont("Times", LABEL_HEIGHT - 5, QFont::Normal));
         txt->setPos(0, ystart);
         scene->addRect(0, ystart, right_border, LABEL_HEIGHT + 5, QPen(Qt::black));
+        scene->addRect(scene->width() - MONTHS_LENGTH, ystart, MONTHS_LENGTH,LABEL_HEIGHT + 5, QPen(Qt::black));
         ystart += LABEL_HEIGHT + 5;
     }
     scene->addRect(0, 0, right_border, scene->height());
